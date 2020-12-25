@@ -1,0 +1,58 @@
+<div class="row mt-5 mb-3 ">
+    <div class=" col-md-6 " >
+        <form *ngIf="status" class="border border-warning" (ngSubmit)="update()" #validation="ngForm">
+            <legend style="text-align: center;">Update User</legend>
+            <div class="form-group ml-3 mr-3">
+                <label for="title">FIRSTNAME</label>
+                <input required [(ngModel)]="user.firstName"  name="name" #nomTemplate1="ngModel" minlength="4" maxlength="12" type="text" class="form-control" id="title" placeholder="Input field">
+                    <div class="alert alert-danger" *ngIf="nomTemplate1.touched && !nomTemplate1.valid">
+                        <div *ngIf="nomTemplate1.errors.required"> ce champs est obligatoire</div>
+                        <div *ngIf="nomTemplate1.errors.minlength"> ({{nomTemplate1.errors.minlength.actualLength}} char) :/ce champs doit avoir  au moins {{nomTemplate1.errors.minlength.requiredLength}} char !</div>
+                    </div>
+            </div>
+            <div class="form-group ml-3 mr-3">
+                <label for="body0">LASTNAME</label>
+                <input  required [(ngModel)]="user.lastName"  name="username"  #nomTemplate="ngModel" minlength="3" maxlength="18"    type="text" class="form-control" id="body0" placeholder="Input field">
+                    <div class="alert alert-danger" *ngIf="nomTemplate.touched && !nomTemplate.valid">
+                        <div *ngIf="nomTemplate.errors.required"> ce champs est obligatoire</div>
+                        <div *ngIf="nomTemplate.errors.minlength"> ({{nomTemplate.errors.minlength.actualLength}} char) :/ce champs doit avoir  au moins {{nomTemplate.errors.minlength.requiredLength}} char !</div>
+                    </div>
+            </div> 
+            <button [disabled]="!validation.valid" class="btn btn-block btn-warning " *ngIf="status">Update</button>
+            <button  (click)="annuler()" class="btn btn-block btn-secondary" >Annuler</button>
+        </form>
+    </div>
+
+</div>
+
+
+<table class="table border border-primary">
+    <thead>
+        <tr>
+            <th>FIRSTNAME</th>
+            <th>LASTNAME</th>
+            <th>EMAIL</th>
+            <th>isAdmin</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let list of listUsers">
+            <td scope="row">{{list.firstName}}</td>
+            <td>{{list.lastName}}</td>
+            <td>{{list.email}}</td>
+            <td>{{list.admin}}</td>
+            <td>
+                <button class="btn btn-warning" (click)="edite(list)">Edite</button>
+            </td>
+            <td *ngIf="!list.admin"> 
+               <button class="btn btn-danger" (click)="delet(list)"> Delete</button>
+            </td>
+        </tr>
+
+    </tbody>
+    <tbody>
+        
+    </tbody>
+</table>

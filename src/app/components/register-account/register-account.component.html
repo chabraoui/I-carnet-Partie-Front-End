@@ -1,0 +1,47 @@
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div *ngIf="checkEmail" class="alert alert-danger">
+        <strong>EMAIL already exist</strong>
+      </div>
+<form [formGroup]="registerForm" (ngSubmit)="save()">
+    <div class="form-group">
+        <label for="exampleInputEmail10">FirstName</label>
+        <input type="string"   formControlName="firstName" class="form-control" id="exampleInputEmail10" aria-describedby="emailHelp" >
+        <div *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched || registerForm.get('firstName').dirty">
+          <div *ngIf="registerForm.get('firstName').getError('required')" class="text-danger"> this field is required</div>
+          <div *ngIf="registerForm.get('firstName').getError('minlength')" class="text-danger"> min= 4 characteres</div>
+          <div *ngIf="registerForm.get('firstName').getError('maxlength')" class="text-danger"> max= 12 characteres</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail12">LastName</label>
+        <input type="string"   formControlName="lastName" class="form-control" id="exampleInputEmail12" aria-describedby="emailHelp" >
+        <div *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched || registerForm.get('lastName').dirty">
+          <div *ngIf="registerForm.get('lastName').getError('required')" class="text-danger"> this field is required</div>
+          <div *ngIf="registerForm.get('lastName').getError('minlength')" class="text-danger"> min= 3 characteres</div>
+          <div *ngIf="registerForm.get('lastName').getError('maxlength')" class="text-danger"> max= 18 characteres</div>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email"   formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched || registerForm.get('email').dirty">
+        <div *ngIf="registerForm.get('email').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="registerForm.get('email').getError('email')" class="text-danger"> Respect champs email </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password"    formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched || registerForm.get('password').dirty">
+        <div *ngIf="registerForm.get('password').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="registerForm.get('password').getError('minlength')" class="text-danger"> min=8char && max 12char </div>
+      </div>
+    </div>
+    <button [disabled]="registerForm.invalid" class="btn  btn-block btn-danger">S'ENREGISTRER</button>
+  </form>
+</div>
+</div>

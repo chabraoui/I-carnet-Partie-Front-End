@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">Navbar</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul *ngIf="userCurrent" class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/addresses/create">New </a>
+            </li> 
+            
+            <li class="nav-item active" *ngIf="admin == 'true'">
+                <a class="nav-link" routerLink="/users/all">Show-Users </a>
+            </li> 
+               
+  
+        </ul>
+        <ul  *ngIf="!userCurrent" class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a routerLink="/register" class="nav-link">Register</a>
+              </li>
+        
+              <li class="nav-item">
+                <a routerLink="/login" class="nav-link">Login</a>
+              </li>
+        </ul>
+        <ul  *ngIf="userCurrent" class="navbar-nav ml-auto">
+            <li class="nav-item mr-3 mt-1">
+                <h6 class="text-white bg-dark">{{userCurrent.name}}</h6>
+              </li>
+            <li class="nav-item">
+                <button (click)="loggedOut()" class="btn-logOut"> logout</button>
+              </li>
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,50 @@
+<div class="row">
+    <h1 class=" text-secondary mx-auto"> ModiFy ADDRESS</h1>
+    <!--<button class="btn btn-warning" (click)="editeaddress(OneAddress)"> Click to modify</button>-->
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+<form [formGroup]="saveAddressForm" (ngSubmit)="modifyAddress()">
+    <div class="form-group">
+        <label for="exampleInputstreet10">Country</label>
+        <input type="string"   formControlName="country" [(ngModel)]="OneAddress.country" name="country" class="form-control" id="exampleInputstreet10" aria-describedby="streetHelp" >
+        <div *ngIf="saveAddressForm.get('country').invalid && saveAddressForm.get('country').touched || saveAddressForm.get('country').dirty">
+          <div *ngIf="saveAddressForm.get('country').getError('required')" class="text-danger"> this field is required</div>
+          <div *ngIf="saveAddressForm.get('country').getError('minlength')" class="text-danger"> min= 4 characteres</div>
+          <div *ngIf="saveAddressForm.get('country').getError('maxlength')" class="text-danger"> max= 20 characteres</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputstreet12">City</label>
+        <input type="string"   formControlName="city"  [(ngModel)]="OneAddress.city" name="city"class="form-control" id="exampleInputstreet12" aria-describedby="streetHelp" >
+        <div *ngIf="saveAddressForm.get('city').invalid && saveAddressForm.get('city').touched || saveAddressForm.get('city').dirty">
+          <div *ngIf="saveAddressForm.get('city').getError('required')" class="text-danger"> this field is required</div>
+          <div *ngIf="saveAddressForm.get('city').getError('minlength')" class="text-danger"> min= 4 characteres</div>
+          <div *ngIf="saveAddressForm.get('city').getError('maxlength')" class="text-danger"> max= 20 characteres</div>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <label for="exampleInputstreet1">Street</label>
+      <input type="street"   formControlName="street"  [(ngModel)]="OneAddress.street" name="street"class="form-control" id="exampleInputstreet1" aria-describedby="streetHelp" placeholder="Enter street">
+      <div *ngIf="saveAddressForm.get('street').invalid && saveAddressForm.get('street').touched || saveAddressForm.get('street').dirty">
+        <div *ngIf="saveAddressForm.get('street').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="saveAddressForm.get('street').getError('minlength')" class="text-danger"> min= 4 characteres</div>
+        <div *ngIf="saveAddressForm.get('street').getError('maxlength')" class="text-danger"> max= 40 characteres</div>
+      </div>
+    </div>
+<div class="form-group">
+    <label for="select">Type</label>
+    <select name="selectmethod" id="select" formControlName="type" [(ngModel)]="OneAddress.type" name="type" class="form-control" value="OneAddress.type"> 
+        <option value="chipping"> chipping </option>
+        <option value="billingue">billingue</option>
+    </select>
+</div>
+    <button [disabled]="saveAddressForm.invalid" class="btn  btn-block btn-danger">S'ENREGISTRER</button>
+  </form>
+
+<p> {{saveAddressForm.value | json }}</p>
+</div>
+</div>

@@ -1,0 +1,44 @@
+
+
+  <div class="row" *ngIf="listAddress.length > 0">
+    <div class="col-md-6" *ngFor="let address of listAddress | paginate: { id: 'listing_pagination', itemsPerPage: 4, currentPage: page } "  >
+
+        <div class="card border-primary mt-3" >
+            <div class="card-body">
+              <h3 class="card-title">Type : {{ address.type }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> <strong>City : </strong> {{ address.city }}</li>
+              <li class="list-group-item"><strong>Street : </strong> {{ address.street }}</li>
+              <li class="list-group-item"><strong>Country : </strong> {{ address.country }}</li>
+              <li class="list-group-item text-center">
+                <button class="btn btn-primary mr-2" [routerLink]="['/addresses/edit', address.addressId]">Edit</button>
+                <button class="btn btn-dark mr-2" (click)="deleteAddress(address.addressId)">Delete</button>
+              </li>
+
+            </ul>
+        </div>
+
+    </div> 
+</div>
+<br>
+<div class=" col-md-6 mx-auto">
+  <pagination-controls id="listing_pagination" (pageChange)="page = $event"></pagination-controls>
+</div>
+
+<!--
+<div [hidden]="hide">
+  <li class="nav-item active">
+    <app-navbar [receive-id]="userCurrent.id"></app-navbar>
+  </li>
+</div>
+-->
+
+
+
+<div class="row" *ngIf="listAddress.length == 0">
+  <h2>Pas d'address</h2>
+</div>
+
+
+  

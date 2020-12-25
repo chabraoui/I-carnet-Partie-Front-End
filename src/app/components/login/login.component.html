@@ -1,0 +1,51 @@
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div *ngIf="mode" class="alert alert-danger">
+        <strong>EMAIL OR PASSWORD IS FALSE</strong>
+      </div>
+<form [formGroup]="loginForm" *ngIf="!status">
+    <div class="form-group">
+      <label for="exampleInputEmail1" *ngIf="!status">Email address</label>
+      <label for="exampleInputEmail1" *ngIf="status">Entrer Votre Email</label>
+      <input type="email"   formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched || loginForm.get('email').dirty">
+        <div *ngIf="loginForm.get('email').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="loginForm.get('email').getError('email')" class="text-danger"> Respect champs email </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1" *ngIf="!status">Password</label>
+      <label for="exampleInputPass" *ngIf="status">New Password</label>
+      <input type="password"    formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched || loginForm.get('password').dirty">
+        <div *ngIf="loginForm.get('password').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="loginForm.get('password').getError('minlength')" class="text-danger"> min=8char && max 12char </div>
+      </div>
+    </div>
+    <button [disabled]="loginForm.invalid" class="btn  btn-block btn-danger" (click)="login()" *ngIf="!status">SE CONNECTER</button>
+    <button  class="btn  btn-block btn-primary" (click)="status=!status " [hidden]="status">MOT DE PASS OUBLIE</button>
+  </form>
+
+  <form [formGroup]="passwordForm" *ngIf="status">
+    <div class="form-group">
+      <label for="exampleInputEmail121" *ngIf="status">Entrer Votre Email</label>
+      <input type="email"   formControlName="email" class="form-control" id="exampleInputEmail121" aria-describedby="emailHelp" placeholder="Enter email">
+      <div *ngIf="passwordForm.get('email').invalid && passwordForm.get('email').touched || passwordForm.get('email').dirty">
+        <div *ngIf="passwordForm.get('email').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="passwordForm.get('email').getError('email')" class="text-danger"> Respect champs email </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPass" *ngIf="status">New Password</label>
+      <input type="password"    formControlName="password" class="form-control" id="exampleInputPass" placeholder="Password">
+      <div *ngIf="passwordForm.get('password').invalid && passwordForm.get('password').touched || passwordForm.get('password').dirty">
+        <div *ngIf="passwordForm.get('password').getError('required')" class="text-danger"> this field is required</div>
+        <div *ngIf="passwordForm.get('password').getError('minlength')" class="text-danger"> min=8char && max 12char </div>
+      </div>
+    </div>
+    <button [disabled]="passwordForm.invalid" class="btn  btn-block btn-success" (click)="updatePassword()"  *ngIf="status">Update Password</button>
+    <button  class="btn  btn-block btn-info" (click)="status=!status" [hidden]="!status">ANNULER</button>
+  </form>
+
+</div>
+</div>
